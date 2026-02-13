@@ -1,5 +1,5 @@
-public with sharing class bankOfCanadaCallout {
-    public void BankCallout(){
+public with sharing class bankOfCanadaCallout implements Queueable, Database.AllowsCallouts {
+    public static void execute(QueueableContext context){
         String Endpoint = bankOfCanadaHandler.endpointHandler();
 
         Http message = new Http();

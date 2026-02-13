@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_new_values</name>
+        <label>Assign new values</label>
+        <locationX>769</locationX>
+        <locationY>490</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Current_Rates.Currencies__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Currencies</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Selected_Rates</targetReference>
+        </connector>
+    </assignments>
+    <customProperties>
+        <name>ScreenProgressIndicator</name>
+        <value>
+            <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
+        </value>
+    </customProperties>
+    <dynamicChoiceSets>
+        <name>AvailableCurrencies</name>
+        <dataType>Multipicklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Currencies__c</picklistField>
+        <picklistObject>Rates__c</picklistObject>
+    </dynamicChoiceSets>
+    <environments>Default</environments>
+    <interviewLabel>Change Chosen Currencies {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Change Chosen Currencies</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Current_Rates</name>
+        <label>Get Current Rates</label>
+        <locationX>749</locationX>
+        <locationY>336</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_new_values</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Rates__c</object>
+        <sortField>LastUpdated__c</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Selected_Rates</name>
+        <label>Update Selected Rates</label>
+        <locationX>750</locationX>
+        <locationY>610</locationY>
+        <inputReference>Get_Current_Rates</inputReference>
+    </recordUpdates>
+    <screens>
+        <description>Select ALL that apply</description>
+        <name>Select_the_desired_Currencies</name>
+        <label>Select the desired Currencies</label>
+        <locationX>753</locationX>
+        <locationY>200</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Get_Current_Rates</targetReference>
+        </connector>
+        <fields>
+            <name>Currencies</name>
+            <choiceReferences>AvailableCurrencies</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Currencies</fieldText>
+            <fieldType>MultiSelectCheckboxes</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>624</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Select_the_desired_Currencies</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
