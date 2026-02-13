@@ -9,18 +9,10 @@ public with sharing class bankOfCanadaHandler {
 
         String[] chosen = new List<String>();
 
-        for(integer i = 0; i < currencies.size(); i++){
-            for(integer p = 0; p < currencies.size(); p++){
-                if(p != i){
-                    chosen.add('FX' + currencies[i] + currencies[p]); 
-                }
-            }
+        for(String money : currencies){
+            chosen.add('FXCAD' + money);
+            chosen.add('FX' + money + 'CAD');
         }
-        //These two loops are used to construct the ENDPOINT, as I need to ask for every combination of the chosen currencies.
-
-        //i represents the current currency on the list, and p represents all the posible combinations, excluding two of the same.
-
-        //This lets me change the currencies to used by just adding a field on the Rates__c object and choosing it in the multiselect Picklist without adding code.
         return chosen;
 
 
