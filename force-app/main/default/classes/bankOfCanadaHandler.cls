@@ -1,25 +1,23 @@
 public with sharing class bankOfCanadaHandler {
-    public static Rates__c COINS = [SELECT currencies__c FROM Rates__c];
-    //Queries currently selected currencies
 
-    public static List<String> currencySeparator(){
-        List<String> currencies = COINS.currencies__c.split(';');
-        //Since it is a Multichoice Picklist, the options are all in a single String, separated by ';'
-        //So I need to separate each individual selected option
-
+    public static List<String> currencySeparator(List<currencies__c> COINS){
         String[] chosen = new List<String>();
 
-        for(String money : currencies){
-            chosen.add('FXCAD' + money);
-            chosen.add('FX' + money + 'CAD');
+         for(currencies__c money : COINS){
+            if(money.name != 'CAD'){
+                chosen.add('FXCAD' + money.name);
+                chosen.add('FX' + money.name + 'CAD');
+            }
         }
+        System.debug(chosen);
         return chosen;
-
-
     }
 
     public static String endpointHandler(){
-        List<String> chosen = currencySeparator();
+        List<currencies__c> COINS = [SELECT name FROM currencies__c];
+        //Queries currently selected currencies
+
+        List<String> chosen = currencySeparator(COINS);
 
         System.debug(chosen);
         String toBeCalled = String.join(chosen, '%2C');
@@ -71,8 +69,6 @@ public with sharing class bankOfCanadaHandler {
                 }*/
             }
             System.debug(rates);
-            rates.currencies__c = COINS.currencies__c;
-            delete COINS;
             insert rates;
         }
     }
