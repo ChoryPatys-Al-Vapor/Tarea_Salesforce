@@ -1,8 +1,7 @@
-trigger bankOfCanadaTrigger on Rates__c (before update) {
+trigger bankOfCanadaTrigger on currencies__c (after insert) {
     switch on Trigger.operationType{
-        when BEFORE_UPDATE { 
-            System.debug('working');
-            bankOfCanadaTriggerHandler.toQueue(Trigger.old, Trigger.new);
+        when AFTER_INSERT { 
+            bankOfCanadaTriggerHandler.toQueue();
         }
     }
 }

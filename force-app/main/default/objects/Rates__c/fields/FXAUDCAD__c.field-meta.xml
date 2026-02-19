@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FXAUDCAD__c</fullName>
+    <description>Rate of exchange between AUD and CAD.</description>
+    <inlineHelpText>Rate from AUD to CAD.</inlineHelpText>
+    <label>AUD to CAD</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>6</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

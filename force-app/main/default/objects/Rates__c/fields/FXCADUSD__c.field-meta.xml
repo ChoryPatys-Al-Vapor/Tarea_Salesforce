@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FXCADUSD__c</fullName>
+    <description>Rate of exchange between CAD and USD.</description>
+    <inlineHelpText>Rate from CAD to USD.</inlineHelpText>
+    <label>CAD to USD</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>6</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>
