@@ -1,6 +1,6 @@
 public with sharing class bankOfCanadaHandler {
 
-    public static List<currencies__c> COINS = [SELECT name FROM currencies__c];
+    public static List<currencies__c> COINS = [SELECT name FROM currencies__c WHERE active__c = TRUE];
     //Queries currently selected currencies
 
     public static List<String> currencySeparator(List<currencies__c> currencies){
@@ -130,7 +130,10 @@ public with sharing class bankOfCanadaHandler {
             for(rates__c debugger : ratesToInsert){
                 System.debug(debugger);
             }
-            upsert ratesToInsert name;
+            
+            bankOfCanadaRatesUpserterBatch upserter = new bankOfCanadaRatesUpserterBatch(ratesToInsert);
+
+            ID upserterID = Database.executeBatch(upserter, 10000);
         }
     }
 }
